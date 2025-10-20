@@ -23,3 +23,15 @@ export interface IRouter {
   url: string;
   path: Router;
 }
+
+export interface IProject {
+  title: string
+  description: string
+  thumbnail: string
+  liveLink?: string
+  repoLink?: string
+  features: string[]
+  tags: string[]
+  challenges?: string[]
+  learned?: string[]
+}
