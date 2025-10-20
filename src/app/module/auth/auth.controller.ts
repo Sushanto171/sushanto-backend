@@ -32,7 +32,19 @@ export const getAccessToken = catchAsync(async (req, res) => {
   });
 });
 
+const logout = catchAsync(async (req, res) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+  sendResponse(res, {
+    success: true,
+    message: "Your are logout successfully",
+    statusCode: 200,
+    data: {},
+  });
+});
+
 export const AuthController = {
   login,
   getAccessToken,
+  logout,
 };
