@@ -4,9 +4,10 @@ dotenv.config();
 interface EnvVar {
   NODE_ENV: "production" | "development";
   PORT: string;
+  DATABASE_URL?: string;
 }
 
-const requiredVars = ["NODE_ENV", "PORT"];
+const requiredVars = ["NODE_ENV", "PORT", "DATABASE_URL"];
 
 export const loadEnvVars = (): EnvVar => {
   requiredVars.forEach((variable) => {
