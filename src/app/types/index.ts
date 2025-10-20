@@ -2,8 +2,8 @@ import { Router } from "express";
 
 export interface IMeta {
   page?: number;
-  totalPage?: number;
-  currentPage?: number;
+  totalPages?: number;
+  limit?: number;
   total?: number;
 }
 export interface IResponse<T> {
@@ -25,13 +25,13 @@ export interface IRouter {
 }
 
 export interface IProject {
-  title: string
-  description: string
-  thumbnail: string
-  liveLink?: string
-  repoLink?: string
-  features: string[]
-  tags: string[]
-  challenges?: string[]
-  learned?: string[]
+  title: string;
+  description: string;
+  thumbnail: string;
+  liveLink?: string;
+  repoLink?: string;
+  features: string[];
+  tags: string[];
+  challenges?: string[];
+  learned?: string[];
 }

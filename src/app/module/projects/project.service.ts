@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { AppError } from "../../helpers/appError";
 import { prisma } from "../../lib/db";
+import { IMeta } from "../../types";
 
 const createProject = async (payload: Prisma.ProjectsCreateInput) => {
   const result = await prisma.projects.create({
@@ -9,8 +10,26 @@ const createProject = async (payload: Prisma.ProjectsCreateInput) => {
   return result;
 };
 
-const getProjects = async () => {
-  return await prisma.projects.findMany();
+const getProjects = async ({
+  limit = 3,
+  page = 1,
+}: {
+  limit?: number;
+  page?: number;
+}) => {
+  const projects = await prisma.projects.findMany({
+    take: limit,
+    skip: limit * (page - 1),
+  });
+  const count = await prisma.projects.count();
+  const meta: IMeta = {
+    limit,
+    totalPages: Math.ceil(count / limit),
+    total: count,
+    page,
+  };
+
+  return { projects, meta };
 };
 
 const getProjectById = async (id: string) => {

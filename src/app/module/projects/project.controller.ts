@@ -13,7 +13,9 @@ const createProject = catchAsync(async (req, res) => {
 });
 
 const getProjects = catchAsync(async (req, res) => {
-  const result = await ProjectService.getProjects();
+  const limit = req.query?.limit ? Number(req.query?.limit) : 3;
+  const page = req.query?.page ? Number(req.query?.page) : 1;
+  const result = await ProjectService.getProjects({ limit, page });
   sendResponse(res, {
     success: true,
     statusCode: 200,
