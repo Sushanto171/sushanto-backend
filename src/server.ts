@@ -1,12 +1,13 @@
 import http, { Server } from "http";
 import app from "./app";
+import { envVars, loadEnvVars } from "./app/config/env.config";
 
 let server: Server;
 
 const startServer = async () => {
   try {
     server = http.createServer(app);
-    server.listen(5000, () => {
+    server.listen(envVars.PORT, () => {
       console.log(`⚡ Server running on: http://localhost:5000`);
     });
     handleProcessEvent();
