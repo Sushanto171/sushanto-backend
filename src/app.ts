@@ -12,6 +12,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get("/", (req: Request, res: Response) => {
+  throw Error("test");
   res.send("Server is running....");
 });
 
