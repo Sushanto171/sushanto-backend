@@ -10,6 +10,7 @@ interface EnvVar {
   PASSWORD: string;
   PHONE: string;
   BCRYPT_SALT_ROUND: string;
+  JWT_SECRET: string;
 }
 
 const requiredVars = [
@@ -21,6 +22,7 @@ const requiredVars = [
   "PASSWORD",
   "PHONE",
   "BCRYPT_SALT_ROUND",
+  "JWT_SECRET",
 ];
 
 export const loadEnvVars = (): EnvVar => {
@@ -39,6 +41,7 @@ export const loadEnvVars = (): EnvVar => {
     PASSWORD: process.env.PASSWORD as string,
     PHONE: process.env.PHONE as string,
     BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND as string,
+    JWT_SECRET: process.env.JWT_SECRET as string,
   };
 };
 
