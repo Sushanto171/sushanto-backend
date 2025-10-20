@@ -1,11 +1,15 @@
 import http, { Server } from "http";
 import app from "./app";
-import { envVars, loadEnvVars } from "./app/config/env.config";
+import { envVars } from "./app/config/env.config";
+import { connectDB } from "./app/lib/db";
+import { seedOwner } from "./app/utils/seedOwner";
 
 let server: Server;
 
 const startServer = async () => {
   try {
+    await seedOwner();
+    await connectDB();
     server = http.createServer(app);
     server.listen(envVars.PORT, () => {
       console.log(`⚡ Server running on: http://localhost:5000`);
