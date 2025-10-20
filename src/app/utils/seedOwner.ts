@@ -1,18 +1,20 @@
 import { envVars } from "../config/env.config";
 import { prisma } from "../lib/db";
 import { IRole } from "../types";
+import { hashPassword } from "./bcrypt";
 
 export const seedOwner = async () => {
   try {
+    const password = await hashPassword(envVars.PASSWORD);
     const owner = await prisma.user.findUnique({
       where: { email: envVars.EMAIL },
     });
-console.log(owner);
+   
     if (!owner) {
       const ownerData = {
         email: envVars.EMAIL,
         name: envVars.NAME,
-        password: envVars.PASSWORD,
+        password,
         role: IRole.owner,
         phone: envVars.PHONE,
       };

@@ -9,6 +9,7 @@ interface EnvVar {
   EMAIL: string;
   PASSWORD: string;
   PHONE: string;
+  BCRYPT_SALT_ROUND: string;
 }
 
 const requiredVars = [
@@ -19,6 +20,7 @@ const requiredVars = [
   "EMAIL",
   "PASSWORD",
   "PHONE",
+  "BCRYPT_SALT_ROUND",
 ];
 
 export const loadEnvVars = (): EnvVar => {
@@ -36,6 +38,7 @@ export const loadEnvVars = (): EnvVar => {
     EMAIL: process.env.EMAIL as string,
     PASSWORD: process.env.PASSWORD as string,
     PHONE: process.env.PHONE as string,
+    BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND as string,
   };
 };
 

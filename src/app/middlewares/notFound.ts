@@ -1,19 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../utils/sendResponse";
 
-export const globalError = (
-  error: any,
+export const notFound = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  // console.log(error);
-  let statusCode = error.statusCode || 500;
-  let message = error.message || "Something went wrong";
+  const path = req.url;
   sendResponse(res, {
     success: false,
-    statusCode,
-    message,
-    data: "",
+    statusCode: 404,
+    message: "Route Does not found",
+    data: {path},
   });
 };

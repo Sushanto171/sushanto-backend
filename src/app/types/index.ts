@@ -1,3 +1,5 @@
+import { Router } from "express";
+
 export interface IMeta {
   page?: number;
   totalPage?: number;
@@ -15,4 +17,9 @@ export interface IResponse<T> {
 export enum IRole {
   owner = "OWNER",
   visitor = "VISITOR",
+}
+
+export interface IRouter {
+  url: string;
+  path: Router;
 }
