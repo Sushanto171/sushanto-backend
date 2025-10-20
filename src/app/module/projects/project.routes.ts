@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { checkAuth } from "../../middlewares/checkAuth";
+import { upload } from "../../middlewares/multer";
 import { validateFormData } from "../../middlewares/validateFormData";
 import { IRole } from "../../types";
 import { ProjectController } from "./project.controller";
@@ -12,7 +13,8 @@ const router = Router();
 router.post(
   "/",
   checkAuth(IRole.owner),
-  validateFormData(createProjectZodSchema),
+  upload.single("thumbnail"),
+  validateFormData(createProjectZodSchema, "thumbnail"),
   ProjectController.createProject
 );
 
@@ -23,7 +25,7 @@ router.get("/:id", ProjectController.getProjectById);
 router.patch(
   "/:id",
   checkAuth(IRole.owner),
-  validateFormData(updateProjectZodSchema),
+  validateFormData(updateProjectZodSchema, "thumbnail"),
   ProjectController.updateProjectById
 );
 
