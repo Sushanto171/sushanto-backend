@@ -8,11 +8,11 @@ let server: Server;
 
 const startServer = async () => {
   try {
-    await seedOwner();
     await connectDB();
+    await seedOwner();
     server = http.createServer(app);
     server.listen(envVars.PORT, () => {
-      console.log(`⚡ Server running on: http://localhost:5000`);
+      console.log(`⚡ Server running on: http://localhost:${envVars.PORT}`);
     });
     handleProcessEvent();
   } catch (error) {
