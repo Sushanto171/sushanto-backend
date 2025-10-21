@@ -10,13 +10,14 @@ datasource db {
 model User {
   id        Int        @id @default(autoincrement())
   name      String?
-  email     String @unique
+  email     String     @unique
   phone     String
   password  String
   role      Role       @default(VISITOR)
   createdAt DateTime   @default(now()) @db.Timestamp()
   updatedAt DateTime   @updatedAt()
   Projects  Projects[]
+  Blogs     Blogs[]
 }
 
 enum Role {
@@ -37,8 +38,20 @@ model Projects {
   learned     String[]
   createdAt   DateTime @default(now()) @db.Timestamp()
   updatedAt   DateTime @updatedAt @db.Timestamp()
-  userId      Int
-  user        User     @relation(fields: [userId], references: [id])
+  authorId    Int
+  author      User     @relation(fields: [authorId], references: [id])
 }
 
-
+model Blogs {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String @unique
+  content   String
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+  thumbnail String
+  images    String[]
+  tags      String[]
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @updatedAt @db.Timestamp()
+}

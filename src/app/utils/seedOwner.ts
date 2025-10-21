@@ -25,5 +25,6 @@ export const seedOwner = async () => {
     }
   } catch (error) {
     console.log("Owner creation Error:", error);
+    throw error
   }
 };

@@ -25,6 +25,7 @@ export interface IRouter {
 }
 
 export interface IProject {
+  id?: number;
   title: string;
   description: string;
   thumbnail: string;
@@ -34,4 +35,17 @@ export interface IProject {
   tags: string[];
   challenges?: string[];
   learned?: string[];
+}
+
+export interface IBlog {
+  id?: number;
+  title: string;
+  slug: string;
+  content: string;
+  author: string;
+  thumbnail?: string;
+  images?: string[];
+  tags?: string[];
+  createdAt: string;
+  updatedAt?: string;
 }
