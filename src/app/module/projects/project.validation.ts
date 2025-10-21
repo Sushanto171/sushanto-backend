@@ -29,7 +29,7 @@ export const createProjectZodSchema = z.object({
 
   learned: z.array(z.string().min(3)).optional(),
 
-  userId: z.number().int().positive("User ID must be a positive integer"),
+  authorId: z.number().int().positive("Author ID must be a positive integer"),
 });
 
 export const updateProjectZodSchema = createProjectZodSchema.partial();

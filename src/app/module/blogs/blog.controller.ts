@@ -1,12 +1,14 @@
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
+import { BlogService } from "./blog.service";
 
 const createBlog = catchAsync(async (req, res) => {
+  const result = await BlogService.createBlog(req.body);
   sendResponse(res, {
     success: true,
     statusCode: 201,
     message: "operation successfully",
-    data: "",
+    data: result,
   });
 });
 
