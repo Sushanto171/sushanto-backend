@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProjectRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const multer_1 = require("../../middlewares/multer");
+const validateFormData_1 = require("../../middlewares/validateFormData");
+const types_1 = require("../../types");
+const project_controller_1 = require("./project.controller");
+const project_validation_1 = require("./project.validation");
+const router = (0, express_1.Router)();
+router.post("/", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), multer_1.upload.single("thumbnail"), (0, validateFormData_1.validateFormData)(project_validation_1.createProjectZodSchema, "thumbnail"), project_controller_1.ProjectController.createProject);
+router.get("/", project_controller_1.ProjectController.getProjects);
+router.get("/:id", project_controller_1.ProjectController.getProjectById);
+router.patch("/:id", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), (0, validateFormData_1.validateFormData)(project_validation_1.updateProjectZodSchema, "thumbnail"), project_controller_1.ProjectController.updateProjectById);
+router.delete("/:id", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), project_controller_1.ProjectController.deleteProjectByID);
+exports.ProjectRoutes = router;

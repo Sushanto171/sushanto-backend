@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BlogRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const multer_1 = require("../../middlewares/multer");
+const validateFormData_1 = require("../../middlewares/validateFormData");
+const types_1 = require("../../types");
+const blog_controller_1 = require("./blog.controller");
+const blog_validation_1 = require("./blog.validation");
+const router = (0, express_1.Router)();
+router.post("/", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), multer_1.upload.single("thumbnail"), (0, validateFormData_1.validateFormData)(blog_validation_1.createBlogZodSchema, "thumbnail"), blog_controller_1.BlogController.createBlog);
+router.get("/", blog_controller_1.BlogController.getBlogs);
+router.get("/:slug", blog_controller_1.BlogController.getBlogBySlug);
+router.patch("/:id", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), blog_controller_1.BlogController.updateBlogById);
+router.delete("/:id", (0, checkAuth_1.checkAuth)(types_1.IRole.owner), blog_controller_1.BlogController.deleteBlogByID);
+exports.BlogRoutes = router;
