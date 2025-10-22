@@ -2,6 +2,7 @@ import z from "zod";
 export const createBlogZodSchema = z.object({
   title: z
     .string()
+    .trim()
     .min(3, "Title must be at least 3 characters long")
     .max(100, "Title must not exceed 100 characters"),
 

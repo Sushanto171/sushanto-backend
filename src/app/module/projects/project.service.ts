@@ -20,6 +20,7 @@ const getProjects = async ({
   const projects = await prisma.projects.findMany({
     take: limit,
     skip: limit * (page - 1),
+    orderBy: { createdAt: "desc" },
   });
   const count = await prisma.projects.count();
   const meta: IMeta = {

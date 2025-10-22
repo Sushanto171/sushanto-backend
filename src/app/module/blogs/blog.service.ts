@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/db";
+import { IMeta } from "../../types";
 
 const createBlog = async (payload: Prisma.BlogsCreateInput) => {
   const baseSlug = payload.title.toLowerCase().split(" ").join("-");
@@ -13,8 +14,27 @@ const createBlog = async (payload: Prisma.BlogsCreateInput) => {
   });
 };
 
-const getBlogs = async () => {
-  return {};
+const getBlogs = async ({
+  limit = 3,
+  page = 1,
+}: {
+  limit?: number;
+  page?: number;
+}) => {
+  const projects = await prisma.blogs.findMany({
+    take: limit,
+    skip: limit * (page - 1),
+    orderBy: { createdAt: "desc" },
+  });
+  const count = await prisma.blogs.count();
+  const meta: IMeta = {
+    limit,
+    totalPages: Math.ceil(count / limit),
+    total: count,
+    page,
+  };
+
+  return { projects, meta };
 };
 
 const getBlogBySlug = async () => {

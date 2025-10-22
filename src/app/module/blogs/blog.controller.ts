@@ -13,11 +13,14 @@ const createBlog = catchAsync(async (req, res) => {
 });
 
 const getBlogs = catchAsync(async (req, res) => {
+  const limit = req.query?.limit ? Number(req.query?.limit) : 3;
+  const page = req.query?.page ? Number(req.query?.page) : 1;
+  const result = await BlogService.getBlogs({ limit, page });
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: "operation successfully",
-    data: "",
+    data: result,
   });
 });
 
