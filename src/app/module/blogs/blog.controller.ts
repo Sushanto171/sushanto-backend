@@ -7,7 +7,7 @@ const createBlog = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 201,
-    message: "operation successfully",
+    message: "Blogs created successfully",
     data: result,
   });
 });
@@ -19,7 +19,7 @@ const getBlogs = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "operation successfully",
+    message: "Blogs retrieved successfully",
     data: result,
   });
 });
@@ -30,26 +30,30 @@ const getBlogBySlug = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "operation successfully",
+    message: "Blog retrieved successfully",
     data: result,
   });
 });
 
 const updateBlogById = catchAsync(async (req, res) => {
+  const id = req.query.id;
+
+  const result = await BlogService.updateBlogById(Number(id), req.body);
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "operation successfully",
-    data: "",
+    message: "The Blog Updated successfully",
+    data: result,
   });
 });
 
 const deleteBlogByID = catchAsync(async (req, res) => {
+  const result = await BlogService.deleteBlogByID(Number(req.params.id));
   sendResponse(res, {
     success: true,
     statusCode: 200,
-    message: "operation successfully",
-    data: "",
+    message: "The Blog Deleted successfully",
+    data: result,
   });
 });
 
