@@ -37,16 +37,18 @@ const getBlogs = async ({
   return { projects, meta };
 };
 
-const getBlogBySlug = async () => {
-  return {};
+const getBlogBySlug = async (slug: string) => {
+  return await prisma.blogs.findUnique({ where: { slug } });
 };
 
-const updateBlogById = async () => {
-  return {};
+const updateBlogById = async (id: number, payload: Prisma.BlogsCreateInput) => {
+  const result = await prisma.blogs.update({ where: { id }, data: payload });
+  return result;
 };
 
-const deleteBlogByID = async () => {
-  return {};
+const deleteBlogByID = async (id: number) => {
+  const result = await prisma.blogs.delete({ where: { id } });
+  return result 
 };
 
 export const BlogService = {

@@ -25,11 +25,13 @@ const getBlogs = catchAsync(async (req, res) => {
 });
 
 const getBlogBySlug = catchAsync(async (req, res) => {
+  const slug = req.params.slug;
+  const result = await BlogService.getBlogBySlug(slug);
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: "operation successfully",
-    data: "",
+    data: result,
   });
 });
 
