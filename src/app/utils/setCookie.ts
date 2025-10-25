@@ -1,4 +1,10 @@
-import { Response } from "express";
+import { CookieOptions, Response } from "express";
+
+const options: CookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+};
 
 export const setCookie = (
   token: {
@@ -8,17 +14,9 @@ export const setCookie = (
   res: Response
 ) => {
   if (token.accessToken) {
-    res.cookie("accessToken", token.accessToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-    });
+    res.cookie("accessToken", token.accessToken, options);
   }
   if (token.refreshToken) {
-    res.cookie("refreshToken", token.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-    });
+    res.cookie("refreshToken", token.refreshToken, options);
   }
 };

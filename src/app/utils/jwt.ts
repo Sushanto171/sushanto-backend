@@ -19,7 +19,7 @@ export const generateToken = (info: JwtPayload) => {
 };
 
 export const decodeToken = (token: string, secret: string) => {
-  if (!token) throw new AppError(404, "missing token");
+  if (!token) throw new AppError(403, "missing token");
 
   return jwt.verify(token, secret, (error, decoded) => {
     if (error) {

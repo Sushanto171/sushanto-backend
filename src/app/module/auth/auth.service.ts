@@ -43,7 +43,15 @@ const getAccessToken = async (refreshToken: string) => {
   return newTokens.accessToken;
 };
 
+const getMe = async (email: string) => {
+  return await prisma.user.findUnique({
+    where: { email },
+    select: { id: true, name: true, email: true, role: true },
+  });
+};
+
 export const AuthService = {
   login,
   getAccessToken,
+  getMe,
 };

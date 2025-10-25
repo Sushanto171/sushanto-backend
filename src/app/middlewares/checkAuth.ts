@@ -38,4 +38,4 @@ export const checkAuth =
     }
   };
 
-checkAuth(IRole.owner, IRole.visitor);
+

@@ -43,8 +43,19 @@ const logout = catchAsync(async (req, res) => {
   });
 });
 
+const getMe = catchAsync(async (req, res) => {
+  const result = await AuthService.getMe(req.user?.email as string);
+  sendResponse(res, {
+    success: true,
+    message: "Your are Profile retrieved successfully",
+    statusCode: 200,
+    data: result,
+  });
+});
+
 export const AuthController = {
   login,
   getAccessToken,
   logout,
+  getMe,
 };
